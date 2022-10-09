@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private UUID id;
 
     private Integer time;
@@ -17,26 +17,23 @@ public class Order {
     private String size;
     private Integer sugar;
 
+    public Order(Integer time , String beverage , String size , Integer sugar) {
+        this.id = UUID.randomUUID ( );
+        this.time = time;
+        this.beverages = beverage;
+        this.size = size;
+        this.sugar = sugar;
+    }
+
+    public Order( ) {
+    }
+
     public Integer getTime( ) {
         return time;
     }
 
     public void setTime(Integer time) {
         this.time = time;
-    }
-
-
-
-    public Order(Integer time , String beverage,String size, Integer sugar) {
-        this.id = UUID.randomUUID ( );
-        this.time = time;
-        this.beverages=beverage;
-        this.size = size;
-        this.sugar= sugar;
-    }
-
-    public Order( ) {
-
     }
 
     public UUID getId( ) {

@@ -9,11 +9,13 @@ public class OrderRepositary {
 
     private final JdbcTemplate jdbc;
 
-    public OrderRepositary(JdbcTemplate jdbc) {this.jdbc = jdbc;}
+    public OrderRepositary(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
 
 
     public void saveOrder(Order order) {
         String sql = "INSERT INTO `Order` VALUES(?, ?,?,?,?)";
-        jdbc.update ( sql,order.getId (),order.getTime(),order.getBeverages (),order.getSize (),order.getSugar () );
+        jdbc.update ( sql , order.getId ( ) , order.getTime ( ) , order.getBeverages ( ) , order.getSize ( ) , order.getSugar ( ) );
     }
 }
