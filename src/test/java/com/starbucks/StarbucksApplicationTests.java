@@ -1,4 +1,4 @@
-package com.starbucks.starbucks;
+package com.starbucks;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

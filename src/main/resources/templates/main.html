@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome, <span> Client </span>!</h1>
+<h2>If you want to book coffee <span></span></h2>
+<form action="/" method="post">
+    <table>
+        <tr>
+            <td class="tdLabel"><label class="label">Enter the time in minutes:</label></td>
+            <td><input type="number" name="time" value="" id="register_minute" style="width:160px"/></td>
+        </tr>
+        <tr>
+            <td class="tdLabel"><label for="register_minute" class="label">Select beverage:</label></td>
+            <td>
+                <input type="radio" name="beverage" id="register_americano" value="AMERICANO"/>
+                <label for="register_americano">americano</label>
+                <input type="radio" name="beverage" id="register_capuchino" value="CAPUCHINO"/>
+                <label for="register_capuchino">capuchino</label>
+                <input type="radio" name="beverage" id="register_tea" value="TEA"/>
+                <label for="register_tea">tea</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdSize"><label for="register_medium" class="label">Select size:</label></td>
+            <td>
+                <input type="radio" name="size" id="register_small" value="SMALL"/>
+                <label for="register_small">small</label>
+                <input type="radio" name="size" id="register_medium" value="MEDIUM"/>
+                <label for="register_medium">medium</label>
+                <input type="radio" name="size" id="register_large" value="LARGE"/>
+                <label for="register_large">large</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdLabel"><label for="register_tea" class="label">Select number of spoon sugar:</label></td>
+            <td><select name="sugar" id="register_country" style="width:160px">
+                <option value="0">no sugar</option>
+                <option value="1">1 spoon</option>
+                <option value="2">2 spoon</option>
+                <option value="3">3 spoon</option>
+                <option value="4">4 spoon</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <button type="submit">Send order</button>
+            </div></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

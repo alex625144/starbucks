@@ -1,0 +1,1 @@
+INSERT INTO `Order` VALUES ( 1, 'AMERICANO','SMALL',3 );
