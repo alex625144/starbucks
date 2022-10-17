@@ -28,8 +28,8 @@ public class WebController{
             @RequestParam String size ,
             @RequestParam Integer sugar
     ) {
-        Order order = new Order ( time , beverage , size , sugar );
-        orderService.saveOrder ( order);
+//        Order order = new Order ( time , beverage , size , sugar );
+//        orderService.saveOrder ( order);
         return "success.html";
     }
 }
