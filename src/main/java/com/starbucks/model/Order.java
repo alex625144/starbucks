@@ -30,16 +30,21 @@ public class Order {
     @Column(name = "sugar", nullable = false)
     private Integer sugar;
 
-    public Order(Integer time , String beverage , String size , Integer sugar) {
-    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statusOrder", nullable = false)
+    private Status status;
+
 
     @Override
     public String toString( ) {
         return "Order{" +
-                "time=" + time +
+                "id=" + id +
+                ", time=" + time +
                 ", beverages='" + beverages + '\'' +
                 ", size='" + size + '\'' +
                 ", sugar=" + sugar +
+                ", status=" + status +
                 '}';
     }
 }
