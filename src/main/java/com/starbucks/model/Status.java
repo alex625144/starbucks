@@ -1,5 +1,5 @@
 package com.starbucks.model;
 
 public enum Status {
-    ORDERED, INPROCESS, READY
+    ORDERED, IN_PROGRESS, READY
 }

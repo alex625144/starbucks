@@ -12,13 +12,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
+@ToString
 @Table(name = "Order", schema = "starbucks", catalog = "postgres")
 public class Order {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
     @Column(name = "time", nullable = false)
@@ -34,17 +34,4 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "statusOrder", nullable = false)
     private Status status;
-
-
-    @Override
-    public String toString( ) {
-        return "Order{" +
-                "id=" + id +
-                ", time=" + time +
-                ", beverages='" + beverages + '\'' +
-                ", size='" + size + '\'' +
-                ", sugar=" + sugar +
-                ", status=" + status +
-                '}';
-    }
 }
