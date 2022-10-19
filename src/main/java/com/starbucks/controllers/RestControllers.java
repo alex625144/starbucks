@@ -20,29 +20,29 @@ public class RestControllers {
 
     @PostMapping()
     public String saveOrder(@RequestBody Order order) {
-        orderService.saveOrder ( order );
-        return order.toString ( );
+        orderService.saveOrder(order);
+        return order.toString();
     }
 
     @PutMapping("/{id}")
-    public String updateOrder(@RequestBody Order order , @PathVariable("id") UUID id) {
+    public String updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
 
         try {
-            orderService.existOrder ( id );
+            orderService.existOrder(id);
         } catch (RuntimeException ex) {
-            throw new ResourceAccessException ( "Order does not exist " );
+            throw new ResourceAccessException("Order does not exist ");
         }
-        orderService.updateOrder ( order , id );
-        return order.toString ( );
+        orderService.updateOrder(order, id);
+        return order.toString();
     }
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") UUID id) {
-        orderService.deleteOrdersById ( id );
+        orderService.deleteOrdersById(id);
     }
 
     @PatchMapping("/{id}")
-    public void patchOrder(@RequestBody Status status , @PathVariable("id") UUID id) {
-        orderService.patchOrder ( id , status );
+    public void patchOrder(@RequestBody Status status, @PathVariable("id") UUID id) {
+        orderService.patchOrder(id, status);
     }
 }
