@@ -20,17 +20,19 @@ public class Order {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @Column(name = "time", nullable = false)
+    @Column(name = "time")
     private Integer time;
-    @Column(name = "beverages", nullable = false)
+
+    @Column(name = "beverages")
     private String beverages;
-    @Column(name = "size", nullable = false)
+
+    @Column(name = "size")
     private String size;
-    @Column(name = "sugar", nullable = false)
+
+    @Column(name = "sugar")
     private Integer sugar;
 
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "statusOrder", nullable = false)
+    @Column(name = "statusOrder")
     private Status status;
 }

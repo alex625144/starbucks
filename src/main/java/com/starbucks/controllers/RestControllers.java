@@ -26,13 +26,12 @@ public class RestControllers {
 
     @PutMapping("/{id}")
     public String updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
-
         try {
             orderService.existOrder(id);
         } catch (RuntimeException ex) {
-            throw new ResourceAccessException("Order does not exist ");
+            throw new ResourceAccessException("Order does not exist");
         }
-        orderService.updateOrder(order, id);
+        orderService.updateOrder(id, order);
         return order.toString();
     }
 
@@ -41,8 +40,13 @@ public class RestControllers {
         orderService.deleteOrdersById(id);
     }
 
-    @PatchMapping("/{id}")
-    public void patchOrder(@RequestBody Status status, @PathVariable("id") UUID id) {
-        orderService.patchOrder(id, status);
+    @PatchMapping("/{status}/{id}")
+    public void patchOrder(@PathVariable("status") Status status, @PathVariable("id") UUID id) {
+        try {
+            orderService.existOrder(id);
+        } catch (RuntimeException ex) {
+            throw new ResourceAccessException("Order does not exist");
+        }
+        orderService.updateStatusOrder(id, status);
     }
 }

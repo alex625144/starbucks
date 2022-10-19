@@ -17,22 +17,17 @@ public class OrderService {
     }
 
     public String saveOrder(Order order) {
-
         orderRepository.save(order);
         return order.toString();
     }
 
-    public String updateOrder(Order order, UUID id) {
-
-        if (orderRepository.existsById(id)) {
-            Order orderDB = orderRepository.findById(id).get();
-            orderDB.setBeverages(order.getBeverages());
-            orderDB.setSize(order.getSize());
-            orderDB.setSugar(order.getSugar());
-            orderRepository.save(orderDB);
-        }
-        return "Order " + id + " not exist";
-
+    public String updateOrder(UUID id, Order order) {
+        Order orderDB = orderRepository.findById(id).get();
+        orderDB.setBeverages(order.getBeverages());
+        orderDB.setSize(order.getSize());
+        orderDB.setSugar(order.getSugar());
+        orderRepository.save(orderDB);
+        return "Order updated!";
     }
 
     public boolean existOrder(UUID id) {
@@ -43,13 +38,10 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    public String patchOrder(UUID id, Status status) {
-        if (orderRepository.existsById(id)) {
-            Order ordeDB = orderRepository.findById(id).get();
-            ordeDB.setStatus(status);
-            orderRepository.save(ordeDB);
-            return "Status changed!";
-        }
-        return "Id does not exist!";
+    public String updateStatusOrder(UUID id, Status status) {
+        Order ordeDB = orderRepository.findById(id).get();
+        ordeDB.setStatus(status);
+        orderRepository.save(ordeDB);
+        return "Status changed to " + status.toString();
     }
 }
