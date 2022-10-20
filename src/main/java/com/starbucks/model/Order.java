@@ -21,7 +21,7 @@ public class Order {
     private UUID id;
 
     @Column(name = "time")
-    private Integer time;
+    private int time;
 
     @Column(name = "beverages")
     private String beverages;
@@ -30,7 +30,7 @@ public class Order {
     private String size;
 
     @Column(name = "sugar")
-    private Integer sugar;
+    private int sugar;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statusOrder")

@@ -19,34 +19,25 @@ public class RestControllers {
     }
 
     @PostMapping()
-    public String saveOrder(@RequestBody Order order) {
-        orderService.saveOrder(order);
-        return order.toString();
+    public Order saveOrder(@RequestBody Order order) {
+        return orderService.saveOrder(order);
     }
 
     @PutMapping("/{id}")
-    public String updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
-        try {
-            orderService.existOrder(id);
-        } catch (RuntimeException ex) {
-            throw new ResourceAccessException("Order does not exist");
-        }
-        orderService.updateOrder(id, order);
-        return order.toString();
+    public Order updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
+        orderService.existOrder(id);
+        return orderService.updateOrder(id, order);
     }
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") UUID id) {
+        orderService.existOrder(id);
         orderService.deleteOrdersById(id);
     }
 
-    @PatchMapping("/{status}/{id}")
-    public void patchOrder(@PathVariable("status") Status status, @PathVariable("id") UUID id) {
-        try {
-            orderService.existOrder(id);
-        } catch (RuntimeException ex) {
-            throw new ResourceAccessException("Order does not exist");
-        }
-        orderService.updateStatusOrder(id, status);
+    @PatchMapping("/{id}/status/{status}")
+    public Order patchOrder(@PathVariable("id") UUID id, @RequestParam("status") Status status) {
+        orderService.existOrder(id);
+        return orderService.updateStatusOrder(id, status);
     }
 }
