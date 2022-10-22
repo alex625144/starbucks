@@ -25,19 +25,16 @@ public class RestControllers {
 
     @PutMapping("/{id}")
     public Order updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
-        orderService.existOrder(id);
         return orderService.updateOrder(id, order);
     }
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") UUID id) {
-        orderService.existOrder(id);
         orderService.deleteOrdersById(id);
     }
 
-    @PatchMapping("/{id}/status/{status}")
+    @PatchMapping("/{id}/status/")
     public Order patchOrder(@PathVariable("id") UUID id, @RequestParam("status") Status status) {
-        orderService.existOrder(id);
         return orderService.updateStatusOrder(id, status);
     }
 }

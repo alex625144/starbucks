@@ -35,4 +35,5 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "statusOrder")
     private Status status;
+
 }

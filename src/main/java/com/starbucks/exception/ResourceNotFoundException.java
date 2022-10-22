@@ -1,8 +1,15 @@
 package com.starbucks.exception;
 
-public class ResourceNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
 
-    public ResourceNotFoundException(String message) {
-        super(message);
+import java.nio.charset.Charset;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends HttpClientErrorException {
+
+    public ResourceNotFoundException(HttpStatus statusCode, String statusText, byte[] body, Charset responseCharset) {
+        super(statusCode, statusText, body, responseCharset);
     }
 }
