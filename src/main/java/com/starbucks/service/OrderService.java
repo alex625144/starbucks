@@ -1,9 +1,9 @@
 package com.starbucks.service;
 
+import com.starbucks.exception.OrderNotFoundException;
 import com.starbucks.model.Order;
 import com.starbucks.model.Status;
 import com.starbucks.repository.OrderRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,40 +17,35 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public String saveOrder(Order order) {
-
-        orderRepository.save ( order );
-        return order.toString ( );
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
 
-    public String updateOrder(Order order , UUID id) {
-
-        if (orderRepository.existsById ( id )) {
-            Order orderDB = orderRepository.findById ( id ).get ( );
-            orderDB.setBeverages ( order.getBeverages ( ) );
-            orderDB.setSize ( order.getSize ( ) );
-            orderDB.setSugar ( order.getSugar ( ) );
-            orderRepository.save ( orderDB );
-        }
-        return "Order " + id + " not exist";
-
-    }
-
-    public boolean existOrder(UUID id) {
-        return orderRepository.existsById ( id );
+    public Order updateOrder(UUID id, Order order) {
+        Order orderDB = findById(id);
+        orderDB.setBeverages(order.getBeverages());
+        orderDB.setSize(order.getSize());
+        orderDB.setSugar(order.getSugar());
+        return orderRepository.save(orderDB);
     }
 
     public void deleteOrdersById(UUID id) {
-        orderRepository.deleteById ( id );
+        findById(id);
+        orderRepository.deleteById(id);
     }
 
-    public String patchOrder(UUID id , Status status) {
-        if (orderRepository.existsById ( id )) {
-            Order ordeDB = orderRepository.findById ( id ).get ( );
-            ordeDB.setStatus ( status );
-            orderRepository.save ( ordeDB );
-            return "Status changed!";
-        }
-        return "Id does not exist!";
+    public Order updateStatusOrder(UUID id, Status status) {
+        Order orderDB = findById(id);
+        orderDB.setStatus(status);
+        return orderRepository.save(orderDB);
+    }
+
+    public Order findById(UUID id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> {
+                    return new OrderNotFoundException("Order not found");
+                });
+
     }
 }
+

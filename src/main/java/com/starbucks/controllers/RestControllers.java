@@ -4,7 +4,6 @@ import com.starbucks.model.Order;
 import com.starbucks.model.Status;
 import com.starbucks.service.OrderService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.UUID;
 
@@ -19,30 +18,22 @@ public class RestControllers {
     }
 
     @PostMapping()
-    public String saveOrder(@RequestBody Order order) {
-        orderService.saveOrder ( order );
-        return order.toString ( );
+    public Order saveOrder(@RequestBody Order order) {
+        return orderService.saveOrder(order);
     }
 
     @PutMapping("/{id}")
-    public String updateOrder(@RequestBody Order order , @PathVariable("id") UUID id) {
-
-        try {
-            orderService.existOrder ( id );
-        } catch (RuntimeException ex) {
-            throw new ResourceAccessException ( "Order does not exist " );
-        }
-        orderService.updateOrder ( order , id );
-        return order.toString ( );
+    public Order updateOrder(@RequestBody Order order, @PathVariable("id") UUID id) {
+        return orderService.updateOrder(id, order);
     }
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") UUID id) {
-        orderService.deleteOrdersById ( id );
+        orderService.deleteOrdersById(id);
     }
 
-    @PatchMapping("/{id}")
-    public void patchOrder(@RequestBody Status status , @PathVariable("id") UUID id) {
-        orderService.patchOrder ( id , status );
+    @PatchMapping("/{id}/status/")
+    public Order patchOrder(@PathVariable("id") UUID id, @RequestParam("status") Status status) {
+        return orderService.updateStatusOrder(id, status);
     }
 }
