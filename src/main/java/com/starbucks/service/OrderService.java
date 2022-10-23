@@ -1,14 +1,11 @@
 package com.starbucks.service;
 
 import com.starbucks.exception.OrderNotFoundException;
-import com.starbucks.exception.ResourceNotFoundException;
 import com.starbucks.model.Order;
 import com.starbucks.model.Status;
 import com.starbucks.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.nio.charset.Charset;
 import java.util.UUID;
 
 @Service
@@ -32,17 +29,8 @@ public class OrderService {
         return orderRepository.save(orderDB);
     }
 
-    public boolean existOrder(UUID id) {
-        try {
-            return orderRepository.existsById(id);
-        } catch (HttpClientErrorException ex) {
-            throw new ResourceNotFoundException(ex.getStatusCode(), ex.getStatusText(), ex.getResponseBodyAsByteArray(),
-                    Charset.defaultCharset());
-        }
-    }
-
     public void deleteOrdersById(UUID id) {
-        existOrder(id);
+        findById(id);
         orderRepository.deleteById(id);
     }
 

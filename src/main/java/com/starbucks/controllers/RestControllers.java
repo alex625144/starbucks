@@ -4,7 +4,6 @@ import com.starbucks.model.Order;
 import com.starbucks.model.Status;
 import com.starbucks.service.OrderService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.UUID;
 
